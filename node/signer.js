@@ -3,7 +3,6 @@ import * as jose from 'jose'
 import got from 'got'
 import * as x509 from '@peculiar/x509'
 import { webcrypto } from 'crypto'
-import Yargs from "yargs";
 
 x509.cryptoProvider.set(webcrypto);
 
@@ -77,9 +76,9 @@ async function generate_csr(cn, dnsSANs) {
 	return csr
 }
 
-async function generate_jwt(cn, dnsSANs, audience, issuer) {
+async function generate_jwt(cn, dnsSANs, audience, issuer, jwkFilename) {
 	// make the jwk
-	const jwkJSON = await JSON.parse(fs.readFileSync('jwk.json').toString())
+	const jwkJSON = await JSON.parse(fs.readFileSync(jwkFilename).toString())
 	const privateKey = await jose.importJWK(jwkJSON)
 	const kid = jwkJSON.kid
 
@@ -106,13 +105,23 @@ async function generate_jwt(cn, dnsSANs, audience, issuer) {
 //   .demandCommand(3)
 //   .parse()
 
-let step = new StepClient()
-await step.init('https://ca:4443','c8de28e620ec4367f734a0c405d92d7350dbec351cec3e4f6a6d1fc9512387aa')
+let caUrl = 'https://ca:4443'
+let caFingerprint = 'c8de28e620ec4367f734a0c405d92d7350dbec351cec3e4f6a6d1fc9512387aa'
 
-const dnsSANs = ['localhost']
-const cn = 'localhost'
+// this is the JWK private key from the CA's JWK provisioner.
+const jwkFilename = 'jwk.json'
+
+// the label of the JWK provisioner in the CA
 const provisionerName = 'jwktest'
-const jwt = await generate_jwt(cn, dnsSANs, step.signURL, provisionerName)
+
+// the common name and DNS sans for the certificate
+const cn = 'localhost'
+const dnsSANs = ['localhost']
+
+let step = new StepClient()
+await step.init(caUrl, caFingerprint)
+
+const jwt = await generate_jwt(cn, dnsSANs, step.signURL, provisionerName, jwkFilename)
 const csr = await generate_csr(cn, dnsSANs)
 const certResponse = await step.sign(csr.toString("pem"), jwt)
 console.log(certResponse.crt)
