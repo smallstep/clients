@@ -41,7 +41,7 @@ This is a better fit for integrating into interactive, end-user workflows.
   {"use":"sig","kty":"EC","kid":"udaECquEXAMPLErW2dYw","crv":"P-256","alg":"ES256","x":"Pn_JEXAMPLEByDJA","y":"_x7JjfwqKEXAMPLEBp73E","d":"u1_OZH1EXAMPLEXAL__bE6u0"}
   ```
   
-  Treat this `decrypted.json` file as you would any sensitive credential. Anyone with this file can create JWTs and request arbitrary certificates from your CA.
+  Treat this `decrypted.json` file as you would any sensitive credential. Anyone with this file can sign arbitrary certificates with your CA.
 
 ## Features
 
