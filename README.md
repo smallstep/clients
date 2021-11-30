@@ -28,13 +28,14 @@ For interactive workflows, this may be a better fit.
 - A JWK provisioner configured in your CA. (use `step ca provisioner add` to add one)
 - The JSON for the provisioner's JWK praviate key, to authenticate the client to the CA. To generate the JSON file, take the `encryptedKey` value from the CA provisioner, and run:
 
-```
-$ step crypto jwk decrypt < encrypted.key > decrypted.json
-Please enter the password to decrypt the content encryption key: 
-$ cat decrypted.json
-{"use":"sig","kty":"EC","kid":"udaECquEXAMPLErW2dYw","crv":"P-256","alg":"ES256","x":"Pn_JEXAMPLEByDJA","y":"_x7JjfwqKEXAMPLEBp73E","d":"u1_OZH1EXAMPLEXAL__bE6u0"}
-```
-- Treat this `decrypted.json` file as you would any sensitive credential. Anyone with this file can create JWTs and request arbitrary certificates from your CA.
+  ```
+  $ step crypto jwk decrypt < encrypted.key > decrypted.json
+  Please enter the password to decrypt the content encryption key: 
+  $ cat decrypted.json
+  {"use":"sig","kty":"EC","kid":"udaECquEXAMPLErW2dYw","crv":"P-256","alg":"ES256","x":"Pn_JEXAMPLEByDJA","y":"_x7JjfwqKEXAMPLEBp73E","d":"u1_OZH1EXAMPLEXAL__bE6u0"}
+  ```
+  
+  Treat this `decrypted.json` file as you would any sensitive credential. Anyone with this file can create JWTs and request arbitrary certificates from your CA.
 
 ## Features
 
