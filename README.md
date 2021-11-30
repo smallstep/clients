@@ -1,6 +1,6 @@
-# step-ca certificate signing clients
+# step-ca certificate signing client
 
-This repo contains client code in various languages, for getting X.509 certificates signed by a [step-ca](https://github.com/smallstep/certificates/) Certificate Authority.
+This repo contains demo client code in various languages, for getting X.509 certificates signed by a [step-ca](https://github.com/smallstep/certificates/) Certificate Authority.
 
 ## How you might use this
 
@@ -9,7 +9,7 @@ Use one of these clients if you need to write a custom integration with `step-ca
 **These clients are not designed to be used directly by end users.** Their use of the [JWK provisioner](https://smallstep.com/docs/step-ca/provisioners#jwk) gives these clients too much power. For end user applications, either use the [OIDC provisioner](https://smallstep.com/docs/step-ca/provisioners/#oauthoidc-single-sign-on), or use this client code to create a custom service that your users will use.
 
 The ideal use case for this is to **delegate CA authentication or access control to a custom service** that will request TLS certificates on behalf of its users/clients.
-Your implementation must be responsible for authenticating certificate requests.
+Your implementation must be responsible for authentication and access control.
 
 For example, say you manage a set of global VPN servers for your company, 
 and each VPN server provides access to an internal network for a given business unit or region.
