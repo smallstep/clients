@@ -22,7 +22,7 @@ It has [many client implementations](https://letsencrypt.org/docs/client-options
 Pair your ACME client with `step-ca`'s [ACME provisioner](https://smallstep.com/docs/step-ca/provisioners#acme).
 
 The OIDC provisioner allows you to authenticate certificate requests using any OpenID Connect identity provider.
-For interactive workflows, this may be a better fit.
+This is a better fit for interactive, end-user workflows.
 
 ## You will need
 
