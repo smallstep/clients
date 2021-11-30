@@ -50,10 +50,6 @@ These clients are not full featured. They are able to do the following:
 - Check CA health
 - Get a Certificate Signing Request (CSR) signed by a [JWK provisioner](https://smallstep.com/docs/step-ca/provisioners#jwk) configured in the CA
 
-The clients authenticate with the CA using a private JSON Web Key (JWK).
-Note that this JWK can typically make any request of the CA, 
-so it's necessary to protect the private key JSON file.
-
 ## Under the hood
 
 To get the CSR signed, clients follow these steps:
