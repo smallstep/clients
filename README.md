@@ -14,9 +14,9 @@ Your implementation must be responsible for authenticating certificate requests.
 For example, say you manage a set of global VPN servers for your company, 
 and each VPN server provides access to an internal network for a given business unit or region.
 You've created a service for managing VPN access and issuing client certificates.
-The service maintains a mapping between employees and VPN servers.
-A user can sign in, request access to a particular server.
-When access is granted, the service will get a client certificate for the user from the CA,
+The service maintains an access control database that maps employees to VPN servers.
+An employee can sign in and request access to a particular server.
+When access is granted, the service will get a client certificate for the employee from the CA,
 and make it available for download.
 
 ## Alternatives
