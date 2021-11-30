@@ -4,16 +4,20 @@ This repo contains client code in various languages, for getting X.509 certifica
 
 ## How you might use this
 
-Use one of these clients if you need to integrate custom X.509 certificate management or enrollment directly into your software.
+Use one of these clients if you need to write a custom integration with `step-ca` that authenticates X.509 certificate requests on behalf of your users.
 
-There are at least two common use cases:
-- You are writing a service or application that needs to request and manage its own TLS certificates.
-- You are writing an application that requests TLS certificates on behalf of users.
+**These clients are not designed to be used directly by end users.** Their use of the [JWK provisioner](https://smallstep.com/docs/step-ca/provisioners#jwk) gives these clients too much power. For end user applications, either use the [OIDC provisioner](https://smallstep.com/docs/step-ca/provisioners/#oauthoidc-single-sign-on), or use this client code to create a custom service that your users will use.
 
-In either case, you will be delegating certificate authentication to your application.
-Your application must be responsible for authenticating certificate requests to it.
+The ideal use case for this is to **delegate CA authentication to an independent service** that will request TLS certificates on behalf of its users/clients.
+Your implementation must be responsible for authenticating certificate requests.
 
-**Note: This client is not designed to be used by end users. The use of the JWK provisioner gives it too much power. For end user applications, use the [OIDC provisioner](https://smallstep.com/docs/step-ca/provisioners/#oauthoidc-single-sign-on) instead.**
+For example, say you manage a set of global VPN servers for your company, 
+and each server provides access an internal network for a given business unit or region.
+You've created a service for managing VPN access and issuing client certificates.
+The service maintains a mapping between employees and VPN servers.
+A user can sign in, request access to a particular server.
+When access is granted, the service will get a client certificate for the user from the CA,
+and make it available for download.
 
 ## Alternatives
 
@@ -21,8 +25,8 @@ If you only need certificates with IP or hostname identifiers, the ACME protocol
 It has [many client implementations](https://letsencrypt.org/docs/client-options/).
 Pair your ACME client with `step-ca`'s [ACME provisioner](https://smallstep.com/docs/step-ca/provisioners#acme).
 
-The OIDC provisioner allows you to authenticate certificate requests using any OpenID Connect identity provider.
-This is a better fit for interactive, end-user workflows.
+The [OIDC provisioner](https://smallstep.com/docs/step-ca/provisioners/#oauthoidc-single-sign-on) allows you to authenticate client certificate requests using any OpenID Connect identity provider.
+This is a better fit for integrating into interactive, end-user workflows.
 
 ## You will need
 
