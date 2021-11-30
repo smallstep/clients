@@ -22,6 +22,19 @@ Pair your ACME client with `step-ca`'s [ACME provisioner](https://smallstep.com/
 The OIDC provisioner allows you to authenticate certificate requests using any OpenID Connect identity provider.
 For interactive workflows, this may be a better fit.
 
+## You will need
+
+- A `step-ca` server or a [Certificate Manager](https://smallstep.com/certificate-manager/) authority.
+- A JWK provisioner configured in your CA. (use `step ca provisioner add` to add one)
+- The JSON for the provisioner's JWK praviate key. To generate the JSON file, take the `encryptedKey` value from the CA provisioner, and run:
+
+```
+$ step crypto jwk decrypt < encrypted.key > decrypted.json
+Please enter the password to decrypt the content encryption key: 
+$ cat decrypted.json
+{"use":"sig","kty":"EC","kid":"udaECquEXAMPLErW2dYw","crv":"P-256","alg":"ES256","x":"Pn_JEXAMPLEByDJA","y":"_x7JjfwqKEXAMPLEBp73E","d":"u1_OZH1EXAMPLEXAL__bE6u0"}
+```
+
 ## Features
 
 These clients are not full featured. They are able to do the following:
