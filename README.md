@@ -12,7 +12,7 @@ The ideal use case for this is to **delegate CA authentication to an independent
 Your implementation must be responsible for authenticating certificate requests.
 
 For example, say you manage a set of global VPN servers for your company, 
-and each server provides access an internal network for a given business unit or region.
+and each server provides access to an internal network for a given business unit or region.
 You've created a service for managing VPN access and issuing client certificates.
 The service maintains a mapping between employees and VPN servers.
 A user can sign in, request access to a particular server.
