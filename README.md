@@ -34,6 +34,7 @@ Please enter the password to decrypt the content encryption key:
 $ cat decrypted.json
 {"use":"sig","kty":"EC","kid":"udaECquEXAMPLErW2dYw","crv":"P-256","alg":"ES256","x":"Pn_JEXAMPLEByDJA","y":"_x7JjfwqKEXAMPLEBp73E","d":"u1_OZH1EXAMPLEXAL__bE6u0"}
 ```
+- Treat this `decrypted.json` file as you would any sensitive credential. Anyone with this file can create JWTs and request arbitrary certificates from your CA.
 
 ## Features
 
