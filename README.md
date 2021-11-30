@@ -59,3 +59,7 @@ To get the CSR signed, clients follow these steps:
 - POST the CSR and JWT to the `/1.0/sign` endpoint on the CA
 - Return the signed TLS certificate PEM from the response.
 
+## See also
+
+- Our [Go client examples](https://github.com/smallstep/certificates/tree/master/examples) in smallstep/certificates. This example illustrates how to do basic CA client operations in Go, using smallstep's Go bindings.
+- Our [Go gRPC example](https://github.com/smallstep/go-grpc-example). This example shows how to create a Go service that uses TLS. A further example illustrates how to manage TLS server certificate using the ACME protocol.
