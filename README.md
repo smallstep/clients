@@ -2,7 +2,7 @@
 
 This repo contains client code in various languages, for getting X.509 certificates signed by a [step-ca](https://github.com/smallstep/certificates/) Certificate Authority.
 
-## How you might use a step-ca client
+## How you might use this
 
 Use one of these clients if you need to integrate custom X.509 certificate management or enrollment directly into your software.
 
@@ -12,6 +12,8 @@ There are at least two common use cases:
 
 In either case, you will be delegating certificate authentication to your application.
 Your application must be responsible for authenticating certificate requests to it.
+
+**Note: This client is not designed to be used by end users. The use of the JWK provisioner gives it too much power. For end user applications, use the [OIDC provisioner](https://smallstep.com/docs/step-ca/provisioners/#oauthoidc-single-sign-on) instead.**
 
 ## Alternatives
 
