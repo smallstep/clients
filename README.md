@@ -25,8 +25,8 @@ For interactive workflows, this may be a better fit.
 ## You will need
 
 - A `step-ca` server or a [Certificate Manager](https://smallstep.com/certificate-manager/) authority.
-- A JWK provisioner configured in your CA, to authenticate the client to the CA. (use `step ca provisioner add` to add one)
-- The JSON for the provisioner's JWK praviate key. To generate the JSON file, take the `encryptedKey` value from the CA provisioner, and run:
+- A JWK provisioner configured in your CA. (use `step ca provisioner add` to add one)
+- The JSON for the provisioner's JWK praviate key, to authenticate the client to the CA. To generate the JSON file, take the `encryptedKey` value from the CA provisioner, and run:
 
 ```
 $ step crypto jwk decrypt < encrypted.key > decrypted.json
