@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "92e8118e-79fe-4a1b-9d87-7ece00b2c3e1",
+		"name": "step-ca",
+		"description": "This collection covers most of the API endpoints for [step-ca](https://github.com/smallstep/certificates).\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CA Health",
+			"protocolProfileBehavior": {
+				"tlsPreferServerCiphers": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{caUrl}}/health",
+					"host": [
+						"{{caUrl}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "Check the health of the CA."
+			},
+			"response": []
+		},
+		{
+			"name": "List Provisioners",
+			"protocolProfileBehavior": {
+				"tlsPreferServerCiphers": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{caUrl}}/provisioners?limit=100",
+					"host": [
+						"{{caUrl}}"
+					],
+					"path": [
+						"provisioners"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get JWK Provisioner Encrypted Key",
+			"protocolProfileBehavior": {
+				"tlsPreferServerCiphers": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{caUrl}}/provisioners/{{provisionerId}}/encrypted-key",
+					"host": [
+						"{{caUrl}}"
+					],
+					"path": [
+						"provisioners",
+						"{{provisionerId}}",
+						"encrypted-key"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign a CSR",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"csr\": \"-----BEGIN CERTIFICATE REQUEST-----\\nMIIBJTCBzAIBADAUMRIwEAYDVQQDEwlsb2NhbGhvc3QwWTATBgcqhkjOPQIBBggq\\nhkjOPQMBBwNCAAQAWeq7aoem0y/UXBjwOneSOFA90WD3hyFXrwG/oeTQyjGnlk2l\\nlgjkD8Wdqj4YTQdc0pdvrqCbhy9SqIngWNXDoFYwVAYJKoZIhvcNAQkOMUcwRTAU\\nBgNVHREEDTALgglsb2NhbGhvc3QwDgYDVR0PAQH/BAQDAgeAMB0GA1UdJQQWMBQG\\nCCsGAQUFBwMBBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiAYzXM0wlHffgtn\\nI9dvx3tnrLHdGdi62kdHXcRLF8V4HAIhAI/Jjg3Tj2ZiO5OH1SEtaS1LcUoUYUhG\\n3eL5D49+VooR\\n-----END CERTIFICATE REQUEST-----\\n\",\n    \"ott\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6InVkYUVDcXVuWlYydk4zZ3c3UWswRXVnYU1OakpZMjhZYXJwTEJyVzJkWXcifQ.eyJzYW5zIjpbImxvY2FsaG9zdCJdLCJzdWIiOiJsb2NhbGhvc3QiLCJpYXQiOjE2Mzg4MzI0NTIsImlzcyI6Imp3a3Rlc3QiLCJhdWQiOiJodHRwczovL2NhOjQ0NDMvMS4wL3NpZ24iLCJuYmYiOjE2Mzg4MzI0NTIsImV4cCI6MTYzODgzMjc1Mn0.09Wqekt1tnCMRVv_qljt7mPukB-FNGdUiq09jBmMdNW3_x8JxKfeJmZGGMFdUdBTichMqy9AVfgXRjNh0jnucA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{caUrl}}/1.0/sign",
+					"host": [
+						"{{caUrl}}"
+					],
+					"path": [
+						"1.0",
+						"sign"
+					]
+				},
+				"description": "This request for signing a CSR, using a JWK provisioner in the CA, requires the following:\n\n*   A `csr` to sign (PKCS#10 PEM)\n*   A `ott` (one-time token) JWT to authorize the request.\n    \n\nThe `csr` in this example, when decoded, looks like:\n\n```\nCertificate Request:\n    Data:\n        Version: 0 (0x0)\n        Subject: CN=localhost\n        Subject Public Key Info:\n            Public Key Algorithm: ECDSA\n                Public-Key: (256 bit)\n                X:\n                    59:ea:bb:6a:87:a6:d3:2f:d4:5c:18:f0:3a:77:92:\n                    38:50:3d:d1:60:f7:87:21:57:af:01:bf:a1:e4:d0:\n                    ca\n                Y:\n                    31:a7:96:4d:a5:96:08:e4:0f:c5:9d:aa:3e:18:4d:\n                    07:5c:d2:97:6f:ae:a0:9b:87:2f:52:a8:89:e0:58:\n                    d5:c3\n                Curve: P-256\n        Requested Extensions:\n            X509v3 Subject Alternative Name:\n                DNS:localhost\n            X509v3 Key Usage: critical\n                Digital Signature\n            X509v3 Extended Key Usage:\n                Server Authentication, Client Authentication\n    Signature Algorithm: ECDSA-SHA256\n         30:45:02:20:18:cd:73:34:c2:51:df:7e:0b:67:23:d7:6f:c7:\n         7b:67:ac:b1:dd:19:d8:ba:da:47:47:5d:c4:4b:17:c5:78:1c:\n         02:21:00:8f:c9:8e:0d:d3:8f:66:62:3b:93:87:d5:21:2d:69:\n         2d:4b:71:4a:14:61:48:46:dd:e2:f9:0f:8f:7e:56:8a:11\n\n```\n\nAnd the `ott` JWT, when decoded, looks like:\n\n```\n{\n  \"alg\": \"ES256\",\n  \"kid\": \"udaECqunZV2vN3gw7Qk0EugaMNjJY28YarpLBrW2dYw\"\n}.{\n  \"sans\": [\n    \"localhost\"\n  ],\n  \"sub\": \"localhost\",\n  \"iat\": 1638832452,\n  \"iss\": \"jwktest\",\n  \"aud\": \"https://ca:4443/1.0/sign\",\n  \"nbf\": 1638832452,\n  \"exp\": 1638832752\n}.[Signature]\n\n```\n\nA few things of note about the constructions of this JWT:\n\n*   It must be signed by the encrypted key (JWK) in the CA's JWK provisioner configuration.\n*   The `iss` field matches the name of the JWK CA provisioner we are requesting the signing operation from.\n*   The `aud` field matches the CA URL we're requesting from.\n*   The `sans` match the SANs in the CSR\n*   The `kid` and `alg` in the header match the JWK's Key ID and algorithm.\n*   The validity period of the JWT in this case is 5 minutes."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "caUrl",
+			"value": "https://ca:4443"
+		}
+	]
+}
