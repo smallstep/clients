@@ -16,8 +16,8 @@ and each VPN server provides access to an internal network for a given business 
 You've created a service for managing VPN access and issuing client certificates.
 The service maintains an access control database that maps employees to VPN servers.
 An employee can sign in and request access to a particular server.
-When access is granted, the service will get a client certificate for the employee from the CA,
-and make it available for download.
+When access is granted, the service will get an appropriate CSR signed by the CA,
+and make the certificate available for download.
 
 ## Alternatives
 
