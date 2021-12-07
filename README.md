@@ -6,7 +6,9 @@ This repo contains demo client code in various languages, for getting X.509 cert
 
 Use one of these clients if you need to write a custom integration with `step-ca` that authenticates X.509 certificate requests on behalf of your users.
 
-**These clients are not designed to be used directly by end users.** Their use of the [JWK provisioner](https://smallstep.com/docs/step-ca/provisioners#jwk) gives these clients too much power. For end user applications, either use the [OIDC provisioner](https://smallstep.com/docs/step-ca/provisioners/#oauthoidc-single-sign-on), or use this client code to create a custom service that your users will use.
+**These clients are not designed to be used directly by end users.** Their use of an unencrypted JWK for the [JWK provisioner](https://smallstep.com/docs/step-ca/provisioners#jwk) gives these clients too much power.
+For end user applications, we recommend using the [OIDC provisioner](https://smallstep.com/docs/step-ca/provisioners/#oauthoidc-single-sign-on).
+Alternatively, you could modify this code to interactively ask for a JWK password to decrypt the JWK used by the CA.
 
 The examples in this repository let you **delegate CA authentication or access control to a custom service** that will request TLS certificates on behalf of its clients.
 Your implementation must be responsible for authentication and access control.
