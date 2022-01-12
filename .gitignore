@@ -1,1 +1,6 @@
 node_modules
+/dotnet core/smallstep-client/smallstep-client.app/bin/Debug/net5.0
+/dotnet core/smallstep-client/smallstep-client.app/obj
+/dotnet core/smallstep-client/smallstep-client.library/bin/Debug/net5.0
+/dotnet core/smallstep-client/smallstep-client.library/obj
+/dotnet core/smallstep-client/smallstep-client.app/jwk.json
