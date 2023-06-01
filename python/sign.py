@@ -46,13 +46,13 @@ class StepClient:
     # https://cryptography.io/en/latest/x509/reference/#x-509-certificate-object
     def sign(self, csr, token):
         r = requests.post(urljoin(self.url, f'1.0/sign'),
-						   verify=self.cert_bundle_fn,
-						   data=json.dumps({'csr': csr.csr_pem, 'ott': token.token}))
+			  verify=self.cert_bundle_fn,
+			  data=json.dumps({'csr': csr.csr_pem, 'ott': token.token}))
         return x509.load_pem_x509_certificate(str.encode(r.json()['crt']))
 
     def health(self):
         with requests.get(urljoin(self.url, f'health'),
-                    verify=self.cert_bundle_fn) as r:
+                          verify=self.cert_bundle_fn) as r:
             print(r.json())
 
     def _save_tempfile(self, contents):
@@ -135,7 +135,7 @@ class CAToken:
         self.token = jwt.encode(
             self.jwt_body(),
             key=key,
-			headers={ "kid": jwk_privkey['kid'] },
+            headers={ "kid": jwk_privkey['kid'] },
             algorithm="ES256"
         )
 
