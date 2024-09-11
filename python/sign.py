@@ -81,7 +81,7 @@ class CSR:
         self.csr_pem = self.csr_pem_bytes.decode('UTF-8')
 
     def _generate_private_key(self):
-        return ec.generate_private_key(ec.SECP384R1)
+    	return ec.generate_private_key(ec.SECP384R1(), backend=None)
 
     # Returns CSR PEM bytes
     def _generate_csr(self):
